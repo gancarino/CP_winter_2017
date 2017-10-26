@@ -19,7 +19,7 @@ public class StringOper {
         System.out.println(s6);
         int bPos = s3.indexOf("b");
         //s3.lastIndexOf("cd");
-        System.out.println("bPos " +bPos);
+        System.out.println("bPos " + bPos);
 
 
         //s6 = s3.replace('b', 'B');
