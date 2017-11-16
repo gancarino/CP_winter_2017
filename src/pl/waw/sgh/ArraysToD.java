@@ -35,7 +35,7 @@ public class ArraysToD {
             System.out.println("-----------------   =");
            for(int k=0;k<colSum.length;k++) {
                System.out.print( colSum[k]+"\t");
-               x+=colSum[k];
+               x+= colSum[k];
            }
         System.out.println("=  "+x);
         }
