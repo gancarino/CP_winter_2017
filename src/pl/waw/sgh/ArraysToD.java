@@ -14,13 +14,11 @@ public class ArraysToD {
         arr2D[2][3] = 867;
         int sum = 0;
         int x=0;
-        int v=0;
 
 
         System.out.println("Length of arr2D = " + arr2D.length);
         System.out.println("Cols of arr2D = " + arr2D[0].length);
         for (int i = 0; i < arr2D.length; i++) {
-
 
             //process every cell
             for (int j = 0; j < arr2D[0].length; j++) {
