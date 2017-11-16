@@ -30,7 +30,7 @@ public class Fibonacci {
         }
 
 /*        System.out.println(number + " Fibonacci number is " +
-                a);*/
+                temp);*/
     }
 
 }
