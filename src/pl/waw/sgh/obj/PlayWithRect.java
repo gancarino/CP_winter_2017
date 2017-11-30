@@ -1,7 +1,5 @@
 package pl.waw.sgh.obj;
 
-import java.awt.*;
-
 public class PlayWithRect {
     public static void main(String[] args) {
         Rectangle r1 = new Rectangle();
@@ -16,5 +14,8 @@ public class PlayWithRect {
 
         Rectangle r3 = new Rectangle();
         System.out.println(r3.calcSurface());
+
+
+
     }
 }

@@ -15,4 +15,18 @@ public class Rectangle extends Shape {
     public double calcSurface() {
         return parA * parB;
     }
+
+    public double calcPerimeter() {
+        return 2*parA + 2*parB;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Shape{" +
+                "parA=" + parA +
+                ", parB=" + parB +
+                '}';
+    }
 }

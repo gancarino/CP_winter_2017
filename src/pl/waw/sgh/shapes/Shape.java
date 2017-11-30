@@ -1,6 +1,6 @@
 package pl.waw.sgh.shapes;
 
-public class Shape {
+public abstract class Shape {
 
     double parA;
     double parB;
@@ -10,7 +10,9 @@ public class Shape {
         this.parB = parB;
     }
 
-    //@Override
+    public abstract double calcSurface();
+
+    @Override
     public String toString() {
         return "Shape{" +
                 "parA=" + parA +
@@ -18,8 +20,8 @@ public class Shape {
                 '}';
     }
 
-    //@Override
-    public boolean isEqual(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -28,5 +30,12 @@ public class Shape {
         if (Double.compare(shape.parA, parA) != 0) return false;
         return Double.compare(shape.parB, parB) == 0;
     }
-
+    /*//@Override
+    public boolean isEqual(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shape shape = (Shape) o;
+        if (Double.compare(shape.parA, parA) != 0) return false;
+        return Double.compare(shape.parB, parB) == 0;
+    }*/
 }
