@@ -11,7 +11,7 @@ public class PlayWithRect {
 
         Rectangle r2 = new Rectangle();
         r2.setParams(4,6);
-        r2.sideA = 10;
+        r2.sideA = 10; // A = 4, became 10
         System.out.println(r2.calcSurface());
 
         Rectangle r3 = new Rectangle();

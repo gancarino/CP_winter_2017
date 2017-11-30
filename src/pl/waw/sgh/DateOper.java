@@ -50,7 +50,7 @@ public class DateOper {
 
         // liczenie ile zajelo nam wprowadzenie daty
         Long stopMillis = System.currentTimeMillis();
-        JOptionPane.showMessageDialog(null, "Success, it tooks you: " + (stopMillis-startMillis));
+        JOptionPane.showMessageDialog(null, "Success, it tooks you: " + (stopMillis-startMillis) + " ms");
 
     }
 }
