@@ -1,20 +1,18 @@
 package pl.waw.sgh.shapes;
 
-public class Rectangle {
-    double sideA;
-    double sideB;
+public class Rectangle extends Shape {
+
+/*
+    double parA;
+    double parB;
+*/
 
     public Rectangle() {
-        this.sideA = 10;
-        this.sideB = 15;
-    }
-
-    public void setParams(double sideA, double sideB) {
-        this.sideA = sideA;
-        this.sideB = sideB;
+        this.parA = 10;
+        this.parB = 15;
     }
 
     public double calcSurface() {
-        return sideA*sideB;
+        return parA * parB;
     }
 }
