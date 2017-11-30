@@ -12,6 +12,8 @@ public class PlayWithShapes {
         if (r1.equals(r2))
         System.out.println("r1 equal to r2 ");
         /*System.out.println(r1.calcSurface());*/
+        if (r1.isEqual(r2))
+            System.out.println("r1 isEqual to r2 ");
         System.out.println(r1);
     }
 }
