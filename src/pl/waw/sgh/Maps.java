@@ -20,7 +20,12 @@ public class Maps {
             howManyPeople += myMap.get(key);
         }
 
+        int sum=0;
+        myMap.values();
+        for(Integer val: myMap.values()) {
+            sum+=val;
+        }
 
-        System.out.println("sum of people = " + howManyPeople);
+        System.out.println("sum of people = " + howManyPeople +"  "+ sum);
     }
 }
