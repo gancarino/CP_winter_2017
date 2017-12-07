@@ -2,6 +2,7 @@ package pl.waw.sgh.shapes;
 
 public abstract class Shape {
 
+
     double parA;
     double parB;
 
