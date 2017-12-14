@@ -20,6 +20,8 @@ import java.util.*;
             /*System.out.println(myLine);*/
                 String pattern = " ";
                 myLine=myLine.toUpperCase();
+                /*myLine=myLine.replace("."," ");
+                myLine=myLine.replace(","," ");*/
                 String[] elem = myLine.split(pattern);
 
                 for (String el : elem) {
