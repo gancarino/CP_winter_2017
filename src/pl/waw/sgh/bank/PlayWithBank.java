@@ -25,9 +25,9 @@ public class PlayWithBank {
             acc2.deposit(300);
             acc2.charge(150);
             acc3.charge(150);
-            bank.transfer(1, 0, -80);
+            bank.transfer(0, 1, 253);
             System.out.println(bank);
-        } catch (BankException ne) {
+        } catch (Exception ne) {
             System.out.println("sth went wrong ...." + ne.getMessage());
         }
     }

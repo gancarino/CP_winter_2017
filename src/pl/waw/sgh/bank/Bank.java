@@ -27,13 +27,16 @@ public class Bank {
     }
 
     public void transfer (Integer fromAccID, Integer toAccID, double amount) throws BankException {
-
+        double d = Double.valueOf(String.valueOf(findAccountByID(fromAccID).getBalance()));
         Account fromAccount = findAccountByID(fromAccID);
         Account toAccount = findAccountByID(toAccID);
-        /*if (findAccountByID(fromAccID).getBalance() < amount )*/
-        fromAccount.charge(amount);
-        toAccount.deposit(amount);
-
+        if (d >= amount) {
+            System.out.println(" Balans konta to " + d);
+            fromAccount.charge(amount);
+            toAccount.deposit(amount);
+        } else {
+             System.out.println(" transfer is not possible from Account " + fromAccID);
+        }
     }
 
     public Customer createCustomer(String firstName,
