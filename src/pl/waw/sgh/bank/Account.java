@@ -1,5 +1,7 @@
 package pl.waw.sgh.bank;
 
+import pl.waw.sgh.bank.Exceptions.InvalidSumException;
+
 import java.math.BigDecimal;
 
 public abstract class Account {
@@ -24,17 +26,16 @@ public abstract class Account {
         this.balance=this.balance.setScale(2);
     }
 
-    public void deposit(double amount) {
-               if(amount>0) {
+    public void deposit(double amount) throws   InvalidSumException {
+               if(amount <=0 ) throw new InvalidSumException(
+                       "Amount " + " to be deposited on Account ID: " + getAccountID() + " cannot be less than or equal 0 ");
                    balance = balance.add(new BigDecimal(amount));
                }
-    }
 
-    public void charge(double amount) {
-               if(amount>0) {
-                   balance = balance.subtract(new BigDecimal(amount));
-                   // big decimal doesn't operate on - and +
-        }
+    public void charge(double amount) throws   InvalidSumException {
+        if(amount <=0 ) throw new InvalidSumException(
+                "Amount " + " to be deposited on Account ID: " + getAccountID() + " cannot be less than or equal 0 ");
+        balance = balance.subtract(new BigDecimal(amount));
     }
 
     public Integer getAccountID() {

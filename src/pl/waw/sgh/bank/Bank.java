@@ -1,5 +1,10 @@
 package pl.waw.sgh.bank;
 
+import pl.waw.sgh.bank.Exceptions.BankException;
+import pl.waw.sgh.bank.Exceptions.InvalidSumException;
+import pl.waw.sgh.bank.Exceptions.NonExistantAccountException;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,18 +18,22 @@ public class Bank {
 
     private Integer lastAccountID = 0;
 
-    private  Account findAccountByID(Integer id) {
+    private  Account findAccountByID(Integer id)  throws NonExistantAccountException {
         for (Account tempAcc : accountList) {
             if(tempAcc.getAccountID().equals(id)) return tempAcc;
         }
-        return null;
+        /*return null;*/
+        throw new NonExistantAccountException("Account ID: "+ id + " does not exist ");
     }
 
-    public void transfer (Integer fromAccID, Integer toAccID, double amount) {
+    public void transfer (Integer fromAccID, Integer toAccID, double amount) throws BankException {
+
         Account fromAccount = findAccountByID(fromAccID);
         Account toAccount = findAccountByID(toAccID);
+        /*if (findAccountByID(fromAccID).getBalance() < amount )*/
         fromAccount.charge(amount);
         toAccount.deposit(amount);
+
     }
 
     public Customer createCustomer(String firstName,
