@@ -31,7 +31,7 @@ public class Bank {
         Account fromAccount = findAccountByID(fromAccID);
         Account toAccount = findAccountByID(toAccID);
         if (d >= amount) {
-            System.out.println(" Balans konta to " + d);
+            System.out.println(" Account balance : " + d);
             fromAccount.charge(amount);
             toAccount.deposit(amount);
         } else {
