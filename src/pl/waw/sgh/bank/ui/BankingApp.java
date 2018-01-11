@@ -157,4 +157,4 @@ public class BankingApp {
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }
-}}
+}
