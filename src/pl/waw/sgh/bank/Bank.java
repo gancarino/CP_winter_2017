@@ -1,10 +1,12 @@
 package pl.waw.sgh.bank;
 
 import pl.waw.sgh.bank.Exceptions.BankException;
-import pl.waw.sgh.bank.Exceptions.InvalidSumException;
 import pl.waw.sgh.bank.Exceptions.NonExistantAccountException;
 
-import java.math.BigDecimal;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,27 +20,22 @@ public class Bank {
 
     private Integer lastAccountID = 0;
 
-
-
-    private  Account findAccountByID(Integer id)  throws NonExistantAccountException {
+    private Account findAccountByID(Integer id) throws NonExistantAccountException {
         for (Account tempAcc : accountList) {
-            if(tempAcc.getAccountID().equals(id)) return tempAcc;
+            if (tempAcc.getAccountID().equals(id)) return tempAcc;
         }
-        /*return null;*/
-        throw new NonExistantAccountException("Account ID: "+ id + " does not exist ");
+        //return null;
+        throw new NonExistantAccountException("Account ID: " + id + " does not exist");
     }
 
-    public void transfer (Integer fromAccID, Integer toAccID, double amount) throws BankException {
-        double d = Double.valueOf(String.valueOf(findAccountByID(fromAccID).getBalance()));
+    //TODO
+    public void transfer(Integer fromAccID, Integer toAccID, double amount)
+//            throws NonExistantAccountException, InvalidSumException {
+            throws BankException {
         Account fromAccount = findAccountByID(fromAccID);
         Account toAccount = findAccountByID(toAccID);
-        if (d >= amount) {
-            System.out.println(" Account balance : " + d);
-            fromAccount.charge(amount);
-            toAccount.deposit(amount);
-        } else {
-             System.out.println(" transfer is not possible from Account " + fromAccID);
-        }
+        fromAccount.charge(amount);
+        toAccount.deposit(amount);
     }
 
     public Customer createCustomer(String firstName,
