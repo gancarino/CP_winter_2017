@@ -58,12 +58,21 @@ public class CustomerUI {
             }
         });
         prevButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                int currentCustomerIndex = bank.getCustomerList().indexOf(curCustomer);
+                if (currentCustomerIndex > 0) {
+                    Customer nextCustomer = bank.getCustomerList().get(currentCustomerIndex -1);
+                    setCustomer(nextCustomer);
+                }
             }
         });
 
+    }
+
+    private void showAccounts() {
+        accountsTableDataModel = new AccountsTableDataModel(bank.)
     }
 
     public void setCustomer(Customer customer) {
