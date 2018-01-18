@@ -30,7 +30,7 @@ public class Hangman {
 
     public void initializeStreams() throws IOException {
         try {
-            File inFile =new File("D:\\dictionary.txt");
+            File inFile =new File("H:\\Computer programming\\dictionary.txt");
             fileReader = new FileReader(inFile);
             bufferedFileReader = new BufferedReader(fileReader);
             String currentLine = bufferedFileReader.readLine();
