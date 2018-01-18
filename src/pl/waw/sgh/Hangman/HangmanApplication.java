@@ -48,7 +48,7 @@ public class HangmanApplication {
                 //Play the gues
 
                 if (game.playGuess(guess)) {
-                    System.out.println("Great guess! That haracter is in the word");
+                    System.out.println("Great guess! That character is in the word");
                 } else {
                     System.out.println("Unfortunately that character isn't in the word");
                 }

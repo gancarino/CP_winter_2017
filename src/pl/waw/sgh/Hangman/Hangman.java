@@ -41,7 +41,7 @@ public class Hangman {
             bufferedFileReader.close();
             fileReader.close();
         } catch (IOException e) {
-            System.out.println(" Could not initialize strams");
+            System.out.println(" Could not initialize streams");
         }
 
     }
@@ -118,14 +118,6 @@ public class Hangman {
         return isItAGoodGuess;
     }
 
-    //" - - - - -\n"+
-    //"|        |\n"+
-    //"|        0\n" +
-    //"|      / | \\ \n"+
-    //"|        |\n" +
-    //"|       / \\ \n" +
-    //"|\n" +
-    //"|\n";
 
 
     public String drawPicture() {
