@@ -5,14 +5,24 @@ import pl.waw.sgh.bank.Account;
 
 import javax.swing.table.DefaultTableModel;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
-/**
- * Created by prubac on 5/24/2017.
- */
 public class AccountsTableDataModel extends DefaultTableModel {
 
     static String[] cols = {"ID", "Type", "Currency", "Balance"};
+
+    private List<Account> accountList = new ArrayList<>();
+
+    private Vector getVectorFromAccount(Account acc) {
+        Vector vector = new Vector();
+        vector.add(acc.getAccountID());
+        vector.add(acc.getClass().getSimpleName().replace("Account", ""));
+        vector.add(acc.getCurrency());
+        vector.add(acc.getBalance());
+        return vector;
+    }
 
     public AccountsTableDataModel(List<Account> accountList) {
         super(cols, 0);
@@ -26,25 +36,36 @@ public class AccountsTableDataModel extends DefaultTableModel {
     }
 
     public void addRow(Account acc) {
-        dataVector.add(acc);
+        accountList.add(acc);
+        addRow(getVectorFromAccount(acc));
         fireTableDataChanged();
     }
 
     public void removeAllRows() {
         dataVector.clear();
+        accountList.clear();
         fireTableDataChanged();
     }
 
     public void removeRow(int rowIndex) {
         dataVector.remove(rowIndex);
+        accountList.remove(rowIndex);
         fireTableDataChanged();
     }
+
+    // Disable editing data in a table
+/*
+    @Override
+    public boolean isCellEditable(int i, int i1) {
+        return false;
+    }
+*/
 
     @Override
     public Class getColumnClass(int colIndex) {
         switch (colIndex) {
             case 0:
-                return Long.class;
+                return Integer.class;
             case 1:
                 return String.class;
             case 2:
@@ -57,26 +78,9 @@ public class AccountsTableDataModel extends DefaultTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowInd, int colInd) {
-        Account acc = (Account) dataVector.get(rowInd);
-        switch (colInd) {
-            case 0:
-                return acc.getAccountID();
-            case 1:
-                return acc.getClass().getSimpleName().
-                        replace("Account", "");
-            case 2:
-                return acc.getCurrency();
-            case 3:
-                return acc.getBalance();
-            default:
-                return new Object();
-        }
-    }
-
-    @Override
     public void setValueAt(Object newVal, int row, int column) {
-        Account account = (Account) dataVector.get(row);
+        super.setValueAt(newVal,row,column);
+        Account account = (Account) accountList.get(row);
         switch (column) {
             case 0:
                 return;
@@ -88,6 +92,5 @@ public class AccountsTableDataModel extends DefaultTableModel {
             case 3:
                 account.setBalance((BigDecimal) newVal);
         }
-
     }
 }

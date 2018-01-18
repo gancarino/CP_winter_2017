@@ -1,11 +1,12 @@
 package pl.waw.sgh.bank;
 
+import pl.waw.sgh.bank.Account;
+import pl.waw.sgh.bank.Customer;
+import pl.waw.sgh.bank.DebitAccount;
 import pl.waw.sgh.bank.Exceptions.BankException;
 import pl.waw.sgh.bank.Exceptions.NonExistantAccountException;
+import pl.waw.sgh.bank.SavingsAccount;
 
-
-import java.util.ArrayList;
-import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,21 @@ public class Bank {
     private Integer lastCustomerID = 0;
 
     private Integer lastAccountID = 0;
+
+    public List<Account> findAccountsByCustomer(Customer cust) {
+        List<Account> customerAccounts = new ArrayList<>();
+        for (Account account: accountList) {
+            if (account.getCustomer().equals(cust)) customerAccounts.add(account);
+        }
+        return customerAccounts;
+    }
+
+    public Customer findCustomerByID(Integer id) throws BankException {
+        for (Customer customer : customerList) {
+            if (id.equals(customer.getCustomerID())) return customer;
+        }
+        throw new BankException("Customer with ID: " + id + " not found");
+    }
 
     private Account findAccountByID(Integer id) throws NonExistantAccountException {
         for (Account tempAcc : accountList) {
