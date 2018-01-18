@@ -21,6 +21,10 @@ public class Bank {
 
     private Integer lastAccountID = 0;
 
+    public void deleteAccount(Account accToDel) {
+        accountList.remove(accToDel);
+    }
+
     public List<Account> findAccountsByCustomer(Customer cust) {
         List<Account> customerAccounts = new ArrayList<>();
         for (Account account: accountList) {

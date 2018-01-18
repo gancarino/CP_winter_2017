@@ -1,10 +1,9 @@
 package pl.waw.sgh.bank.ui;
 
+import pl.waw.sgh.bank.Account;
 import pl.waw.sgh.bank.Bank;
 import pl.waw.sgh.bank.Customer;
 import pl.waw.sgh.bank.Exceptions.BankException;
-
-import pl.waw.sgh.bank.ui.AccountsTableDataModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -226,13 +225,20 @@ public class CustomerUI {
         newDebitAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                if (curCustomer != null) {
+                    Account newAcc = bank.createDebitAccount(curCustomer);
+                    accountsTableDataModel.addRow(newAcc);
+                }
             }
         });
         JMenuItem newSavingsAccount = new JMenuItem("New Savings Account");
         newSavingsAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                if (curCustomer != null) {
+                    Account newAcc = bank.createSavingsAccount(curCustomer);
+                    accountsTableDataModel.addRow(newAcc);
+                }
 
             }
         });
@@ -240,7 +246,12 @@ public class CustomerUI {
         deleteAccount.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                int[] accountIdsToDel = accountTable.getSelectedRows();
+                for (int selInd : accountIdsToDel) {
+                    Account accToDel = accountsTableDataModel.getAccountByRow(selInd);
+                    bank.deleteAccount(accToDel);
+                }
+                showAccounts();
             }
         });
         contextMenu.add(newDebitAccount);
@@ -248,5 +259,4 @@ public class CustomerUI {
         contextMenu.add(deleteAccount);
         accountTable.addMouseListener(new MyMouseListener());
     }
-
 }
