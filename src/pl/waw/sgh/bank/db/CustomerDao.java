@@ -44,7 +44,8 @@ public class CustomerDao {
                         "create table CUSTOMER ( "
                                 + "CUSTOMER_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY CONSTRAINT customers_pk PRIMARY KEY, "
                                 + "FIRSTNAME VARCHAR(50), "
-                                + "LASTNAME VARCHAR(50)"
+                                + "LASTNAME VARCHAR(50),"
+                                + "EMAIL VARCHAR(80)"
                                 + ") ");
             }
             rs.close();
@@ -57,13 +58,15 @@ public class CustomerDao {
         try {
             PreparedStatement pStmt = connection
                     .prepareStatement("insert into " +
-                            "CUSTOMER(FIRSTNAME, LASTNAME) values(?, ?)");
+                            "CUSTOMER(FIRSTNAME, LASTNAME, EMAIL) " +
+                            "values(?, ?, ?)");
             //.prepareStatement("insert into " +
             //		"CUSTOMER(FIRSTNAME, LASTNAME) values(" +
             //		 customer.getFirstName() + ", " +
             //		 customer.getLastName() + ")");
             pStmt.setString(1, customer.getFirstName());
             pStmt.setString(2, customer.getLastName());
+            pStmt.setString(3, customer.getEmail());
             pStmt.execute();
 
         } catch (SQLException e) {
@@ -71,25 +74,26 @@ public class CustomerDao {
         }
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         try {
             PreparedStatement pStmt = connection
                     .prepareStatement("delete from CUSTOMER where CUSTOMER_ID = ?");
-            pStmt.setLong(1,id);
+            pStmt.setInt(1,id);
             pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void update(Long id, String firstName, String lastName) {
+    public void update(Integer id, String firstName, String lastName, String email) {
         try {
             PreparedStatement pStmt = connection
                     .prepareStatement(
-                            "UPDATE CUSTOMER SET FIRSTNAME=?, LASTNAME=? WHERE CUSTOMER_ID =?");
+                            "UPDATE CUSTOMER SET FIRSTNAME=?, LASTNAME=?, EMAIL=? WHERE CUSTOMER_ID =?");
             pStmt.setString(1, firstName);
             pStmt.setString(2, lastName);
-            pStmt.setLong(3, id);
+            pStmt.setString(3, email);
+            pStmt.setInt(4, id);
             pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,9 +107,11 @@ public class CustomerDao {
     public List<Customer> retrieveCustomers() {
         try {
             List<Customer> customers = new ArrayList<Customer>();
-            ResultSet rs = connection.createStatement().executeQuery("select CUSTOMER_ID, FIRSTNAME, LASTNAME from CUSTOMER");
+            ResultSet rs = connection.createStatement().executeQuery(
+                    "select CUSTOMER_ID, FIRSTNAME, LASTNAME, EMAIL from CUSTOMER");
+            //"select * from CUSTOMER");
             while (rs.next()) {
-                Customer customer = new Customer(rs.getLong(1), rs.getString(2), rs.getString(3));
+                Customer customer = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 customers.add(customer);
             }
             rs.close();
@@ -118,16 +124,16 @@ public class CustomerDao {
 
 
     public static void main(String[] args) throws Exception {
-        Customer kl1 = new Customer("John", "Brown");
-        Customer kl2 = new Customer("Anne", "Smith");
+        Customer kl1 = new Customer(0, "John", "Brown", "john@brown.com");
+        Customer kl2 = new Customer(0, "Anne", "Smith", "anne@smith.com");
 
         System.out.println("Storing customers");
-        //CustomerDao.getInstance().store(kl1);
-        //CustomerDao.getInstance().store(kl2);
+        CustomerDao.getInstance().store(kl1);
+        CustomerDao.getInstance().store(kl2);
 
-        //CustomerDao.getInstance().delete(3L);
+        CustomerDao.getInstance().delete(3);
 
-        CustomerDao.getInstance().update(4L, "Joanne", "D'Arch");
+        CustomerDao.getInstance().update(4, "Joanne", "D'Arch", "email");
 
         System.out.println("Retrieving customers");
         List<Customer> customers = CustomerDao.getInstance().retrieveCustomers();
@@ -136,6 +142,7 @@ public class CustomerDao {
             System.out.println("ID: " + customer.getCustomerID());
             System.out.println("FirstName: " + customer.getFirstName());
             System.out.println("LastName: " + customer.getLastName());
+            System.out.println("Email: " + customer.getEmail());
             System.out.println("-----------------------------");
         }
 
